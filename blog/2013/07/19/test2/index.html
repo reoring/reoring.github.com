@@ -5,14 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>初投稿 - ReoringPress</title>
+  <title>Octpressを初めてみました - ReoringPress</title>
   <meta name="author" content="Your Name">
 
   
   <meta name="description" content="BlogをOctpressで書き始めてみる 記事作成 1
 bundle exec rake new_post プレビュー 1
 bundle exec rake preview デプロイ 1
-bundle exec rake deploy ">
+bundle exec rake deploy コメント欄をつける _config.ymlに下記行を追加 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@ bundle exec rake deploy ">
   
   <header>
     
-      <h1 class="entry-title">初投稿</h1>
+      <h1 class="entry-title">Octpressを初めてみました</h1>
     
     
       <p class="meta">
@@ -116,6 +116,41 @@ bundle exec rake deploy ">
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rake deploy
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h2>コメント欄をつける</h2>
+
+<p>_config.ymlに下記行を追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">disqus_short_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mimemo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>はてなブックマークをシェア部分に追加</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'> <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://b.hatena.ne.jp/entry/{{ page.url }}&quot;</span> <span class="na">class=</span><span class="s">&quot;hatena-bookmark-button&quot;</span> <span class="na">data-hatena-bookmark-layout=</span><span class="s">&quot;standard&quot;</span> <span class="na">title=</span><span class="s">&quot;このエントリーをはてなブックマークに追加&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://b.st-hatena.com/images/entry-button/button-only.gif&quot;</span> <span class="na">alt=</span><span class="s">&quot;このエントリーをはてなブックマークに追加&quot;</span> <span class="na">width=</span><span class="s">&quot;20&quot;</span> <span class="na">height=</span><span class="s">&quot;20&quot;</span> <span class="na">style=</span><span class="s">&quot;border: none;&quot;</span> <span class="nt">/&gt;&lt;/a&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://b.st-hatena.com/js/bookmark_button.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span> <span class="na">async=</span><span class="s">&quot;async&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'> <span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Octpressのテンプレートエンジンのプレースホルダーをエスケープする</h2>
+
+<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、rawでエスケープします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>
+</span><span class='line'>{{ page.url }}
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -152,6 +187,11 @@ bundle exec rake deploy ">
   
 </div>
 
+ <div style="float:left">
+     <a href="http://b.hatena.ne.jp/entry//blog/2013/07/19/test2/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+   <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+ </div>
+
     
     <p class="meta">
       
@@ -181,7 +221,7 @@ bundle exec rake deploy ">
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/19/test2/">初投稿</a>
+        <a href="/blog/2013/07/19/test2/">Octpressを初めてみました</a>
       </li>
     
   </ul>
