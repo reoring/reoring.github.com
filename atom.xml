@@ -4,7 +4,7 @@
   <title><![CDATA[ReoringPress]]></title>
   <link href="http://reoring.github.io/atom.xml" rel="self"/>
   <link href="http://reoring.github.io/"/>
-  <updated>2013-07-19T19:28:45+09:00</updated>
+  <updated>2013-07-19T19:47:30+09:00</updated>
   <id>http://reoring.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NFS CookbookをWheezyに対応させる]]></title>
+    <link href="http://reoring.github.io/blog/2013/07/19/nfs-cookbook/"/>
+    <updated>2013-07-19T19:36:00+09:00</updated>
+    <id>http://reoring.github.io/blog/2013/07/19/nfs-cookbook</id>
+    <content type="html"><![CDATA[<p>NFSのCookbookがGitHubで公開されているのだけど、Wheezyで実行するとportmapあたりでエラーになる。これはWheezyではportmapはrpcbindというサービスに変更されているから発生する。</p>
+
+<p><a href="https://github.com/atomic-penguin/cookbook-nfs">https://github.com/atomic-penguin/cookbook-nfs</a></p>
+
+<p>forkしたレポジトリ
+<a href="https://github.com/reoring/cookbook-nfs">https://github.com/reoring/cookbook-nfs</a></p>
+
+<h2>Berksfileにcookbookの場所を追加</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">site</span> <span class="ss">:opscode</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">metadata</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;nfs&#39;</span><span class="p">,</span> <span class="ss">git</span><span class="p">:</span> <span class="s1">&#39;git://github.com/reoring/cookbook-nfs.git&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Cookbookを取得しなおす</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rm</span> <span class="no">Berksfile</span><span class="o">.</span><span class="n">lock</span>
+</span><span class='line'><span class="n">berks</span> <span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>行った変更</h2>
+
+<p>attributes/default.rb に下記変更を追加。
+nodeのplatform_versionでOSのバージョンが取得できるので、それを使って判断する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Debian 7.0+</span>
+</span><span class='line'><span class="k">if</span> <span class="n">node</span><span class="o">[</span><span class="s1">&#39;platform&#39;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;debian&quot;</span> <span class="ow">and</span> <span class="n">node</span><span class="o">[</span><span class="s1">&#39;platform_version&#39;</span><span class="o">].</span><span class="n">to_i</span> <span class="o">&gt;=</span> <span class="mi">7</span>
+</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;service&#39;</span><span class="o">][</span><span class="s1">&#39;lock&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;nfs-common&quot;</span>
+</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;service&#39;</span><span class="o">][</span><span class="s1">&#39;portmap&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;rpcbind&quot;</span>
+</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;packages&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="sx">%w{ nfs-common rpcbind }</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本家にプルリクしたら既に同様のプルリクがあった…orz</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[初投稿]]></title>
