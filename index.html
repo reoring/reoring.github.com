@@ -146,6 +146,13 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
 
 
 <p>本家にプルリクしたら既に同様のプルリクがあった…orz</p>
+
+<h2>nodeってなに？</h2>
+
+<p>node変数には、Chef Soloを実行している環境の様々な変数が入っています。
+これは Ohai というミドルウェアが頑張って収集していきているデータです。</p>
+
+<p><a href="http://docs.opscode.com/ohai.html">http://docs.opscode.com/ohai.html</a></p>
 </div>
   
   
@@ -182,6 +189,8 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
 
 
   <div class="entry-content"><p>BlogをOctpressで書き始めてみる</p>
+
+<p><a href="http://octopress.org/">http://octopress.org/</a></p>
 
 <h2>記事作成</h2>
 
@@ -228,16 +237,7 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
 
 <h2>Octpressのテンプレートエンジンのプレースホルダーをエスケープする</h2>
 
-<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、rawでエスケープします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>
-</span><span class='line'>{{ page.url }}
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
+<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、&#8221;&ldquo;でエスケープします。</p>
 </div>
   
   

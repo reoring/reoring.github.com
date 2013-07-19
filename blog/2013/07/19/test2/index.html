@@ -9,10 +9,10 @@
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="BlogをOctpressで書き始めてみる 記事作成 1
+  <meta name="description" content="BlogをOctpressで書き始めてみる http://octopress.org/ 記事作成 1
 bundle exec rake new_post プレビュー 1
 bundle exec rake preview デプロイ 1
-bundle exec rake deploy コメント欄をつける _config.ymlに下記行を追加 1 &hellip;">
+bundle exec rake deploy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +96,8 @@ bundle exec rake deploy コメント欄をつける _config.ymlに下記行を�
 
 <div class="entry-content"><p>BlogをOctpressで書き始めてみる</p>
 
+<p><a href="http://octopress.org/">http://octopress.org/</a></p>
+
 <h2>記事作成</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -141,16 +143,7 @@ bundle exec rake deploy コメント欄をつける _config.ymlに下記行を�
 
 <h2>Octpressのテンプレートエンジンのプレースホルダーをエスケープする</h2>
 
-<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、rawでエスケープします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>
-</span><span class='line'>{{ page.url }}
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
+<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、&#8221;&ldquo;でエスケープします。</p>
 </div>
 
 
