@@ -152,7 +152,24 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
 <p>node変数には、Chef Soloを実行している環境の様々な変数が入っています。
 これは Ohai というミドルウェアが頑張って収集していきているデータです。</p>
 
-<p><a href="http://docs.opscode.com/ohai.html">http://docs.opscode.com/ohai.html</a></p>
+<p>その他にも、attriburesで設定した変数などもnodeに入ってきます。</p>
+
+<p>platform_versionの他にも、下記の情報が入っています。</p>
+
+<ul>
+<li>node[&lsquo;platform&rsquo;]</li>
+<li>node[&lsquo;ipaddress&rsquo;]</li>
+<li>node[&lsquo;macaddress&rsquo;]</li>
+<li>node[&lsquo;fqdn&rsquo;]</li>
+<li>node[&lsquo;hostname&rsquo;]</li>
+<li>node[&lsquo;domain&rsquo;]</li>
+<li>node[&lsquo;recipes&rsquo;]</li>
+<li>node[&lsquo;roles&rsquo;]</li>
+<li>node[&lsquo;ohai_time&rsquo;]</li>
+</ul>
+
+
+<p>詳しくは、Opscodeのサイトに書いてあります。<a href="http://docs.opscode.com/ohai.html">http://docs.opscode.com/ohai.html</a></p>
 </div>
   
   
