@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ReoringPress</title>
+  <title>Vagrant Wheezy BoxをVeeWeeで作る - ReoringPress</title>
   <meta name="author" content="Your Name">
 
   
@@ -21,7 +21,7 @@ Debian Wheezy Vagrnat 1.0以降はパッケージで提供されています。 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reoring.github.io">
+  <link rel="canonical" href="http://reoring.github.io/blog/2013/07/20/veewee-wheezy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="ReoringPress" type="application/atom+xml">
@@ -66,15 +66,12 @@ Debian Wheezy Vagrnat 1.0以降はパッケージで提供されています。 
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/20/veewee-wheezy/">Vagrant Wheezy BoxをVeeWeeで作る</a></h1>
+      <h1 class="entry-title">Vagrant Wheezy BoxをVeeWeeで作る</h1>
     
     
       <p class="meta">
@@ -97,7 +94,7 @@ Debian Wheezy Vagrnat 1.0以降はパッケージで提供されています。 
   </header>
 
 
-  <div class="entry-content"><h2>構築した環境</h2>
+<div class="entry-content"><h2>構築した環境</h2>
 
 <ul>
 <li>Mac OS X 10.8.4</li>
@@ -347,133 +344,16 @@ Debian Wheezy Vagrnat 1.0以降はパッケージで提供されています。 
 
 <p><a href="http://atnd.org/events/40871/">ATNDはこちら</a></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/nfs-cookbook/">NFS CookbookをWheezyに対応させる</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
 
-<time datetime="2013-07-19T19:36:00+09:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>NFSのCookbookがGitHubで公開されているのだけど、Wheezyで実行するとportmapあたりでエラーになる。これはWheezyではportmapはrpcbindというサービスに変更されているから発生する。</p>
-
-<p><a href="https://github.com/atomic-penguin/cookbook-nfs">https://github.com/atomic-penguin/cookbook-nfs</a></p>
-
-<p>forkしたレポジトリ
-<a href="https://github.com/reoring/cookbook-nfs">https://github.com/reoring/cookbook-nfs</a></p>
-
-<h2>Berksfileにcookbookの場所を追加</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">site</span> <span class="ss">:opscode</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">metadata</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;nfs&#39;</span><span class="p">,</span> <span class="ss">git</span><span class="p">:</span> <span class="s1">&#39;git://github.com/reoring/cookbook-nfs.git&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Cookbookを取得しなおす</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rm</span> <span class="no">Berksfile</span><span class="o">.</span><span class="n">lock</span>
-</span><span class='line'><span class="n">berks</span> <span class="n">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>行った変更</h2>
-
-<p>attributes/default.rb に下記変更を追加。
-nodeのplatform_versionでOSのバージョンが取得できるので、それを使って判断する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Debian 7.0+</span>
-</span><span class='line'><span class="k">if</span> <span class="n">node</span><span class="o">[</span><span class="s1">&#39;platform&#39;</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;debian&quot;</span> <span class="ow">and</span> <span class="n">node</span><span class="o">[</span><span class="s1">&#39;platform_version&#39;</span><span class="o">].</span><span class="n">to_i</span> <span class="o">&gt;=</span> <span class="mi">7</span>
-</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;service&#39;</span><span class="o">][</span><span class="s1">&#39;lock&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;nfs-common&quot;</span>
-</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;service&#39;</span><span class="o">][</span><span class="s1">&#39;portmap&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;rpcbind&quot;</span>
-</span><span class='line'>    <span class="n">default</span><span class="o">[</span><span class="s1">&#39;nfs&#39;</span><span class="o">][</span><span class="s1">&#39;packages&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="sx">%w{ nfs-common rpcbind }</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>本家にプルリクしたら既に同様のプルリクがあった…orz</p>
-
-<h2>nodeってなに？</h2>
-
-<p>node変数には、Chef Soloを実行している環境の様々な変数が入っています。
-これは Ohai というミドルウェアが頑張って収集していきているデータです。</p>
-
-<p>その他にも、attriburesで設定した変数などもnodeに入ってきます。</p>
-
-<p>platform_versionの他にも、下記の情報が入っています。</p>
-
-<ul>
-<li>node[&lsquo;platform&rsquo;]</li>
-<li>node[&lsquo;ipaddress&rsquo;]</li>
-<li>node[&lsquo;macaddress&rsquo;]</li>
-<li>node[&lsquo;fqdn&rsquo;]</li>
-<li>node[&lsquo;hostname&rsquo;]</li>
-<li>node[&lsquo;domain&rsquo;]</li>
-<li>node[&lsquo;recipes&rsquo;]</li>
-<li>node[&lsquo;roles&rsquo;]</li>
-<li>node[&lsquo;ohai_time&rsquo;]</li>
-</ul>
-
-
-<p>詳しくは、Opscodeのサイトに書いてあります。<a href="http://docs.opscode.com/ohai.html">http://docs.opscode.com/ohai.html</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/test2/">Octpressを初めてみました</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -485,76 +365,43 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
   
 
 
-<time datetime="2013-07-19T19:16:00+09:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-07-20T20:54:00+09:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
+      
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>BlogをOctpressで書き始めてみる</p>
-
-<p><a href="http://octopress.org/">http://octopress.org/</a></p>
-
-<h2>記事作成</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rake new_post
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>プレビュー</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rake preview
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>デプロイ</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>コメント欄をつける</h2>
-
-<p>_config.ymlに下記行を追加</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">disqus_short_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">reoring</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>はてなブックマークをシェア部分に追加</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'> <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;float:left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://b.hatena.ne.jp/entry/{{ page.url }}&quot;</span> <span class="na">class=</span><span class="s">&quot;hatena-bookmark-button&quot;</span> <span class="na">data-hatena-bookmark-layout=</span><span class="s">&quot;standard&quot;</span> <span class="na">title=</span><span class="s">&quot;このエントリーをはてなブックマークに追加&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://b.st-hatena.com/images/entry-button/button-only.gif&quot;</span> <span class="na">alt=</span><span class="s">&quot;このエントリーをはてなブックマークに追加&quot;</span> <span class="na">width=</span><span class="s">&quot;20&quot;</span> <span class="na">height=</span><span class="s">&quot;20&quot;</span> <span class="na">style=</span><span class="s">&quot;border: none;&quot;</span> <span class="nt">/&gt;&lt;/a&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://b.st-hatena.com/js/bookmark_button.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span> <span class="na">async=</span><span class="s">&quot;async&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'> <span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Octpressのテンプレートエンジンのプレースホルダーをエスケープする</h2>
-
-<p>Octpressでは、 {{ page.url }}  といった変数が使えるのですが、これそのものを記事にしたいときは、&#8221;&ldquo;でエスケープします。</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reoring.github.io/blog/2013/07/20/veewee-wheezy/" data-via="" data-counturl="http://reoring.github.io/blog/2013/07/20/veewee-wheezy/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+ <div style="float:left">
+     <a href="http://b.hatena.ne.jp/entry//blog/2013/07/20/veewee-wheezy/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+   <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+ </div>
 
-    </article>
-  
-  <div class="pagination">
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/19/nfs-cookbook/" title="Previous Post: NFS CookbookをWheezyに対応させる">&laquo; NFS CookbookをWheezyに対応させる</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -583,6 +430,7 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -597,7 +445,10 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
       var disqus_shortname = 'mimemo';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://reoring.github.io/blog/2013/07/20/veewee-wheezy/';
+        var disqus_url = 'http://reoring.github.io/blog/2013/07/20/veewee-wheezy/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

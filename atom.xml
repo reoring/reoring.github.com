@@ -4,7 +4,7 @@
   <title><![CDATA[ReoringPress]]></title>
   <link href="http://reoring.github.io/atom.xml" rel="self"/>
   <link href="http://reoring.github.io/"/>
-  <updated>2013-07-20T20:21:49+09:00</updated>
+  <updated>2013-07-20T20:55:55+09:00</updated>
   <id>http://reoring.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,263 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant Wheezy BoxをVeeWeeで作る]]></title>
+    <link href="http://reoring.github.io/blog/2013/07/20/veewee-wheezy/"/>
+    <updated>2013-07-20T20:54:00+09:00</updated>
+    <id>http://reoring.github.io/blog/2013/07/20/veewee-wheezy</id>
+    <content type="html"><![CDATA[<h2>構築した環境</h2>
+
+<ul>
+<li>Mac OS X 10.8.4</li>
+<li>XCode 4.6.3
+
+<ul>
+<li>事前にCommand Line Toolsはインストールしておく</li>
+</ul>
+</li>
+<li>rbenv</li>
+<li>Vagrant 1.2.2</li>
+<li>Debian Wheezy</li>
+</ul>
+
+
+<p>Vagrnat 1.0以降はパッケージで提供されています。gemからVagrantを入れる必要ありませんので、最新の場合はインストール部分を省略してください。</p>
+
+<p><a href="http://downloads.vagrantup.com/">Vagrantダウンロード一覧</a></p>
+
+<h1>VirtualBoxをインストール</h1>
+
+<p><a href="http://download.virtualbox.org/virtualbox/4.2.12/VirtualBox-4.2.12-84980-OSX.dmg">http://download.virtualbox.org/virtualbox/4.2.12/VirtualBox-4.2.12-84980-OSX.dmg</a></p>
+
+<h1>rbenv</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+</span><span class='line'>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</span><span class='line'>
+</span><span class='line'>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
+</span><span class='line'>echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
+</span><span class='line'>
+</span><span class='line'>exec $SHELL -l
+</span><span class='line'>
+</span><span class='line'>rbenv install 1.9.3-p429
+</span><span class='line'>rbenv global  1.9.3-p429
+</span><span class='line'>rbenv rehash
+</span><span class='line'>
+</span><span class='line'>gem install bundler
+</span><span class='line'>
+</span><span class='line'>exec $SHELL -l</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Vagrantのインストール</h1>
+
+<p><a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p>
+
+<p><a href="http://downloads.vagrantup.com/tags/v1.2.2">http://downloads.vagrantup.com/tags/v1.2.2</a></p>
+
+<p>Vagrant-1.2.2.dmg をダウンロードしてインストール</p>
+
+<h2>VeeWeeのインストール</h2>
+
+<p>VeeWeeはBoxファイルのテンプレートを生成してくれるパッケージです。</p>
+
+<h3>Bundlerが入っていなければ入れる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/jedi4ever/veewee.git
+</span><span class='line'>cd veewee
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>仮想マシンの定義</h2>
+
+<p>Debianの環境を作成する。</p>
+
+<p>このコマンドはveeweeディレクトリ内で実行する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec veewee vbox define "wheezy" "Debian-7.1.0-amd64-netboot"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そうするとdefinationsにテンプレートが作成されるので、それらを編集する。</p>
+
+<h3>definition.rb 編集</h3>
+
+<p>vim definitions/wheezy/definition.rb</p>
+
+<p>ミラーの参照先を変更</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:iso_src =&gt; "http://ftp.riken.jp/Linux/debian/debian-cd/7.1.0/amd64/iso-cd/debian-7.1.0-amd64-netinst.iso",</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>仮想マシンのビルド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec veewee vbox build wheezy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しばらく待つ。途中でisoをダウンロードするか聞いてくるのでyesとする。</p>
+
+<p>自動的に仮想マシンが起動するので、またしばらく放置。</p>
+
+<p>プロンプトに</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The box wheezy was built successfully!
+</span><span class='line'>
+</span><span class='line'>ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 7222 -l veewee 127.0.0.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と表示されていれば、このコマンドで vagrant というパスワードでsshログインが可能。</p>
+
+<p>この状態になったら一度落とします。</p>
+
+<h2>boxファイルへエクスポート</h2>
+
+<p>構築した仮想環境をboxファイルにエクスポートします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec veewee vbox export wheezy</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>仮想環境の登録と初期化</h2>
+
+<p>veeweeディレクトリから抜けて、仮想マシン用のディレクトリを作成します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir ~/box/wheezy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>さて、いよいよ。登録して起動です。</p>
+
+<h3>エクスポートしたboxを登録します。</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add 'base_wheezy' 'wheezy.box'</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant init wheezy
+</span><span class='line'>
+</span><span class='line'># カレントディレクトリにVagrantfileが作成される
+</span><span class='line'>
+</span><span class='line'>vagrant up
+</span><span class='line'>
+</span><span class='line'>Bringing machine 'default' up with 'virtualbox' provider...
+</span><span class='line'>[default] Importing base box 'wheezy'...
+</span><span class='line'>[default] Matching MAC address for NAT networking...
+</span><span class='line'>[default] Setting the name of the VM...
+</span><span class='line'>[default] Clearing any previously set forwarded ports...
+</span><span class='line'>[default] Creating shared folders metadata...
+</span><span class='line'>[default] Clearing any previously set network interfaces...
+</span><span class='line'>[default] Preparing network interfaces based on configuration...
+</span><span class='line'>[default] Forwarding ports...
+</span><span class='line'>[default] -- 22 =&gt; 2222 (adapter 1)
+</span><span class='line'>[default] Booting VM...
+</span><span class='line'>[default] Waiting for VM to boot. This can take a few minutes.
+</span><span class='line'>[default] VM booted and ready for use!
+</span><span class='line'>[default] Configuring and enabling network interfaces...
+</span><span class='line'>[default] Mounting shared folders...
+</span><span class='line'>[default] -- /vagrant</span></code></pre></td></tr></table></div></figure>
+
+
+<p>起動が完了しました！</p>
+
+<h2>ログインしてみる</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh
+</span><span class='line'>
+</span><span class='line'>[vagrant@localhost ~]$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プロンプトがでましたね。
+仮想マシンを起動したカレントディレクトリが、/vagrant として仮想マシン内から参照可能です。</p>
+
+<h2>仮想マシンの停止</h2>
+
+<h3>作業情報を保持したまま停止</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant halt</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>作業情報をすべて破棄</h3>
+
+<p>この方法は仮想マシンのファイルはすべて破棄されます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant destroy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一度boxファイルができてしまえば vagrant コマンドだけで、すぐに構築した仮想マシンをすぐに各環境で立ち上げることができます。</p>
+
+<p>複数の環境を自動的にテストする目的には特に有用かと思います。</p>
+
+<h2>Appendix</h2>
+
+<p>公開されている box 一覧
+<a href="http://www.vagrantbox.es/">http://www.vagrantbox.es/</a></p>
+
+<p>今回作ったboxは欲しい人がいたらあげます。</p>
+
+<h1>Chef ＋ Vagrant入門（ハンズオン）やります!!</h1>
+
+<p><a href="http://atnd.org/events/40871/">ATNDはこちら</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NFS CookbookをWheezyに対応させる]]></title>
