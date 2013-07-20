@@ -4,7 +4,7 @@
   <title><![CDATA[ReoringPress]]></title>
   <link href="http://reoring.github.io/atom.xml" rel="self"/>
   <link href="http://reoring.github.io/"/>
-  <updated>2013-07-20T20:19:15+09:00</updated>
+  <updated>2013-07-20T20:21:49+09:00</updated>
   <id>http://reoring.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -132,7 +132,7 @@ nodeのplatform_versionでOSのバージョンが取得できるので、それ�
 <p>_config.ymlに下記行を追加</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">disqus_short_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mimemo</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">disqus_short_name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">reoring</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
