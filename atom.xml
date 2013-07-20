@@ -4,7 +4,7 @@
   <title><![CDATA[ReoringPress]]></title>
   <link href="http://reoring.github.io/atom.xml" rel="self"/>
   <link href="http://reoring.github.io/"/>
-  <updated>2013-07-20T20:55:55+09:00</updated>
+  <updated>2013-07-20T21:22:45+09:00</updated>
   <id>http://reoring.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -262,7 +262,9 @@
 <p>公開されている box 一覧
 <a href="http://www.vagrantbox.es/">http://www.vagrantbox.es/</a></p>
 
-<p>今回作ったboxは欲しい人がいたらあげます。</p>
+<p>今回作ったboxファイル</p>
+
+<p> <a href="https://www.dropbox.com/s/ps447hpvfmdjwoy/wheezy.box">https://www.dropbox.com/s/ps447hpvfmdjwoy/wheezy.box</a></p>
 
 <h1>Chef ＋ Vagrant入門（ハンズオン）やります!!</h1>
 
