@@ -4,7 +4,7 @@
   <title><![CDATA[ReoringPress]]></title>
   <link href="http://reoring.github.io/atom.xml" rel="self"/>
   <link href="http://reoring.github.io/"/>
-  <updated>2013-08-03T05:03:06+09:00</updated>
+  <updated>2013-08-03T05:11:33+09:00</updated>
   <id>http://reoring.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -207,6 +207,8 @@ Vagrantを作成している、hashicorp社が開発しているみたい。</p>
 
 
 <p>そして、vagrant up &mdash;provider=aws を実行すると、Packerで構築した環境が立ち上がる。</p>
+
+<p>あとはいつものようにvagrant sshすれば、ログインできる。</p>
 ]]></content>
   </entry>
   
