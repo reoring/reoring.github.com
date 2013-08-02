@@ -270,17 +270,23 @@ Vagrantを作成している、hashicorp社が開発しているみたい。</p>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">-*-</span> <span class="err">mode:</span> <span class="err">ruby</span> <span class="err">-*-</span>
 </span><span class='line'><span class="err">#</span> <span class="err">vi:</span> <span class="err">set</span> <span class="err">ft=ruby</span> <span class="err">:</span>
 </span><span class='line'>
 </span><span class='line'><span class="err">Vagrant.configure(</span><span class="s2">&quot;2&quot;</span><span class="err">)</span> <span class="err">do</span> <span class="err">|config|</span>
 </span><span class='line'>    <span class="err">config.vm.box</span> <span class="err">=</span> <span class="s2">&quot;packer_test&quot;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="err">config.vm.provider</span> <span class="err">:aws</span> <span class="err">do</span> <span class="err">|aws|</span>
+</span><span class='line'>    <span class="err">config.vm.provider</span> <span class="err">:aws</span> <span class="err">do</span> <span class="err">|aws,</span> <span class="err">override|</span>
 </span><span class='line'>        <span class="err">aws.access_key_id</span> <span class="err">=</span> <span class="s2">&quot;AWSのアクセスキー&quot;</span>
 </span><span class='line'>        <span class="err">aws.secret_access_key</span> <span class="err">=</span> <span class="s2">&quot;AWSのシークレットキー&quot;</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="err">aws.ssh_username</span> <span class="err">=</span> <span class="s2">&quot;ubuntu&quot;</span>
+</span><span class='line'>        <span class="err">aws.keypair_name</span> <span class="err">=</span> <span class="s2">&quot;packer&quot;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="err">override.ssh.username</span> <span class="err">=</span> <span class="s2">&quot;ubuntu&quot;</span>
+</span><span class='line'>        <span class="err">override.ssh.private_key_path</span> <span class="err">=</span> <span class="s2">&quot;~/packer_test/packer.pem&quot;</span>
 </span><span class='line'>    <span class="err">end</span>
 </span><span class='line'><span class="err">end</span>
 </span></code></pre></td></tr></table></div></figure>
