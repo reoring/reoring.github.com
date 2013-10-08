@@ -2,8 +2,8 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
+url: http://reoring.github.io
+title: ReoringPress
 subtitle: A blogging framework for hackers.
 author: Your Name
 simple_search: http://google.com/search
@@ -98,3 +98,8 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# comments 
+disqus_short_name: reoring
+
+google_analytics_tracking_id: UA-42927703-1
